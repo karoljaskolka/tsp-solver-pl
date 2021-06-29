@@ -1,0 +1,36 @@
+.is-grid
+    &-2, &-3, &-4, &-5, &-6, &-12
+        display: grid
+        grid-template-columns: repeat(1, 1fr)
+
+    +tablet
+        &-2, &-4
+            grid-template-columns: repeat(2, 1fr)
+        &-3, &-6
+            grid-template-columns: repeat(3, 1fr)
+        &-5
+            grid-template-columns: repeat(5, 1fr)
+        &-12
+            grid-template-columns: repeat(6, 1fr)
+
+    +desktop
+        &-4
+            grid-template-columns: repeat(4, 1fr)
+        &-6
+            grid-template-columns: repeat(6, 1fr)
+        &-12
+            grid-template-columns: repeat(12, 1fr)
+
+.is-grid-mobile
+    &-2
+        grid-template-columns: repeat(2, 1fr)
+    &-3
+        grid-template-columns: repeat(3, 1fr)
+    &-4
+        grid-template-columns: repeat(4, 1fr)
+    &-5
+        grid-template-columns: repeat(5, 1fr)
+
+.has-grid-items-centered
+    justify-items: center
+    align-items: center

@@ -1,0 +1,24 @@
+button
+    -webkit-appearance: none
+    border: 0
+    padding: 0.5rem 1rem
+    &:hover:not(:disabled)
+        opacity: 0.75
+        cursor: pointer
+    &:disabled
+        opacity: 0.5
+        cursor: not-allowed
+
+.has-buttons
+    &-centered
+        text-align: center
+        button
+            margin: 0.25em
+    &-left
+        text-align: left
+        button
+            margin-right: 0.25em
+    &-right
+        text-align: right
+        button
+            margin-left: 0.25em

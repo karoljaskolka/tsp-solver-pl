@@ -1,0 +1,50 @@
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: 'Roboto', sans-serif // import
+
+body
+    background-color: $background
+
+a
+    text-decoration: none
+    color: $textLink
+    &:hover
+        text-decoration: underline
+        cursor: pointer
+
+ul 
+    list-style-type: none
+
+.has-action
+    cursor: pointer
+
+.has-radius
+    border-radius: $radius
+
+.has-box-shadow
+    box-shadow: $box-shadow
+
+.is-relative
+    position: relative
+
+// RESPONSIVE LAYOUT
+
+.is-not-mobile
+    display: none
+    +tablet
+        display: block
+
+.is-mobile
+    display: block
+    +tablet
+        display: none
+
+.page-container
+    width: 100%
+    margin: auto
+    +tablet
+        max-width: calc(#{$tablet} - 2*16px)
+    +desktop
+        max-width: calc(#{$desktop} - 2*16px)
