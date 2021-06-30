@@ -1,0 +1,24 @@
+<section class="mt-3">
+    <div class="is-flex border-container ph-3 pv-3 mb-2">
+        <span class="is-flex-2">From</span>
+        <span class="is-flex-2">To</span>
+        <span class="is-flex-1 has-text-right">Distance</span>
+    </div>
+    <ng-container *ngFor="let city of currRoute; let i = index; let last = last">
+        <div class="is-flex ph-3 pv-2 mb-1 has-bg-primary" *ngIf="!last">
+            <span class="is-flex-2">{{ cities[currRoute[i]].name }}</span>
+            <span class="is-flex-2">{{ cities[currRoute[i+1]].name }}</span>
+            <span class="is-flex-1 has-text-right">{{ calcDistance(cities[currRoute[i]], cities[currRoute[i+1]]) }} km</span>
+        </div>
+        <div class="is-flex ph-3 pv-2 mb-1 has-bg-primary" *ngIf="last && currRoute.length === cities.length">
+            <span class="is-flex-2">{{ cities[currRoute[i]].name }}</span>
+            <span class="is-flex-2">{{ cities[currRoute[0]].name }}</span>
+            <span class="is-flex-1 has-text-right">{{ calcDistance(cities[currRoute[i]], cities[currRoute[0]]) }} km</span>
+        </div>
+        <div class="is-flex border-container ph-3 pv-2 mb-1  has-text-medium" *ngIf="last && currRoute.length === cities.length">
+            <span class="is-flex-2"></span>
+            <span class="is-flex-2"></span>
+            <span class="is-flex-1 has-text-right">{{ getRouteDistance() }} km</span>
+        </div>
+    </ng-container>
+</section>

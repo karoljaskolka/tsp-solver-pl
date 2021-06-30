@@ -1,6 +1,6 @@
 import { CityDto } from "../core/dto/city";
 
-export function calcDistance(from: CityDto, to: CityDto) {
+export function calcDistance(from: CityDto, to: CityDto): number {
     const R = 6371;
     const fromLat = from.lat * Math.PI/180;
     const toLat = to.lat * Math.PI/180;
@@ -13,5 +13,5 @@ export function calcDistance(from: CityDto, to: CityDto) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     
     const distance = R * c; 
-    return distance.toFixed(0);
+    return Number(distance.toFixed(0));
 }

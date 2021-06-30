@@ -110,7 +110,7 @@
                 />
                 <!-- back to start -->
                 <line 
-                    *ngIf="i == currRoute.length - 1"
+                    *ngIf="i == currRoute.length - 1 && currRoute.length === cities.length"
                     [attr.x1]="getCx(cities[currRoute[i]])" 
                     [attr.y1]="getCy(cities[currRoute[i]])" 
                     [attr.x2]="getCx(cities[currRoute[0]])"
