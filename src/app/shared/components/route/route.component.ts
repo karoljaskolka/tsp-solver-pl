@@ -23,11 +23,11 @@ export class RouteComponent implements OnInit {
     });
   }
 
-  calcDistance(from: CityDto, to: CityDto) {
+  calcDistance(from: CityDto, to: CityDto): number {
     return calcDistance(from, to);
   }
 
-  getRouteDistance() {
+  getRouteDistance(): number {
     return getRouteDistance(this.currRoute, this.cities);
   }
 

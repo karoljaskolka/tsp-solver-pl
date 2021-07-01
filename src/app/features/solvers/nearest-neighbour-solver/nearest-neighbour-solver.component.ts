@@ -28,18 +28,18 @@ export class NearestNeighbourSolverComponent implements OnInit {
     });
   }
 
-  calcDistance(from: CityDto, to: CityDto) {
+  calcDistance(from: CityDto, to: CityDto): number {
     return calcDistance(from, to);
   }
 
-  async solve() {
+  async solve(): Promise<void> {
     this.isRunning = true;
     let leftCities = Array.from(Array(18).keys()).filter(index => index != this.startCity.value);
     this.currRoute = [];
-    this.currRoute.push(this.startCity.value); 
+    this.currRoute.push(this.startCity.value);
     while (leftCities.length) {
       await this.delay();
-      const nearestNeighbourIndex = this.getNearestNeighbour(this.currRoute[this.currRoute.length - 1], leftCities)
+      const nearestNeighbourIndex = this.getNearestNeighbour(this.currRoute[this.currRoute.length - 1], leftCities);
       this.currRoute = this.currRoute.concat(nearestNeighbourIndex);
       leftCities = leftCities.filter(index => index != nearestNeighbourIndex);
       this.cdRef.markForCheck();
@@ -47,20 +47,20 @@ export class NearestNeighbourSolverComponent implements OnInit {
     this.isRunning = false;
   }
 
-  getNearestNeighbour(cityIndex: number, leftCities: number[]) {
+  getNearestNeighbour(cityIndex: number, leftCities: number[]): number {
     let nearestNeighbourIndex = leftCities[0];
-    let nearestNeighbourDistance = calcDistance(this.cities[cityIndex], this.cities[nearestNeighbourIndex])
+    let nearestNeighbourDistance = calcDistance(this.cities[cityIndex], this.cities[nearestNeighbourIndex]);
     leftCities.forEach(index => {
-      const distance = calcDistance(this.cities[cityIndex], this.cities[index])
+      const distance = calcDistance(this.cities[cityIndex], this.cities[index]);
       if (distance < nearestNeighbourDistance) {
         nearestNeighbourIndex = index;
         nearestNeighbourDistance = distance;
       }
-    })
+    });
     return nearestNeighbourIndex;
   }
 
-  clear() {
+  clear(): void {
     this.currRoute = [];
   }
 

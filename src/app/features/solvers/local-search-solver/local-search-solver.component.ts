@@ -22,7 +22,7 @@ export class LocalSearchSolverComponent implements OnInit {
   form: FormGroup = new FormGroup({
     operation: new FormControl('swap'),
     iterations: new FormControl(15)
-  })
+  });
 
   get operation() {
     return this.form.value.operation;
@@ -39,7 +39,7 @@ export class LocalSearchSolverComponent implements OnInit {
   get iterationsList() {
     return [5, 10, 15, 20, 25];
   }
-  
+
   constructor(private citiesService: CitiesService, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -49,12 +49,12 @@ export class LocalSearchSolverComponent implements OnInit {
     });
   }
 
-  async solve(){
+  async solve(): Promise<void>{
     this.isRunning = true;
     this.bestRoute = getRandomRoute(this.cities.length);
     let globalMin = getRouteDistance(this.bestRoute, this.cities);
     let changed;
-    for(let i = 0; i < this.iterations; i++) {
+    for (let i = 0; i < this.iterations; i++) {
       changed = false;
       const { route, distance } = await this.getLocalMinimum(this.bestRoute, globalMin);
       if (distance < globalMin) {
@@ -63,7 +63,7 @@ export class LocalSearchSolverComponent implements OnInit {
         this.cdRef.markForCheck();
         changed = true;
       }
-      if (!changed) break;
+      if (!changed) { break; }
     }
     this.currRoute = [];
     this.isRunning = false;
@@ -73,17 +73,17 @@ export class LocalSearchSolverComponent implements OnInit {
   async getLocalMinimum(route: Array<number>, distance: number): Promise<{ route: Array<number>, distance: number }> {
     let bestlocalRoute: Array<number> = route;
     let localMin: number = distance;
-    for(let i = 0; i < this.cities.length; i++) {
-      for(let j = 0; j < this.cities.length; j++) {
+    for (let i = 0; i < this.cities.length; i++) {
+      for (let j = 0; j < this.cities.length; j++) {
         if (i !== j) {
-          if (this.operation === 'swap') this.currRoute = swap([...route], i, j);
-          if (this.operation === 'insert') this.currRoute = insert([...route], i, j);
-          if (this.operation === 'invert') this.currRoute = invert([...route], i, j);
+          if (this.operation === 'swap') { this.currRoute = swap([...route], i, j); }
+          if (this.operation === 'insert') { this.currRoute = insert([...route], i, j); }
+          if (this.operation === 'invert') { this.currRoute = invert([...route], i, j); }
           await this.delay(1);
           this.cdRef.markForCheck();
-          const distance = getRouteDistance(this.currRoute, this.cities);
-          if (distance < localMin) {
-            localMin = distance;
+          const localDistance = getRouteDistance(this.currRoute, this.cities);
+          if (localDistance < localMin) {
+            localMin = localDistance;
             bestlocalRoute = this.currRoute;
           }
         }
@@ -92,7 +92,7 @@ export class LocalSearchSolverComponent implements OnInit {
     return { route: bestlocalRoute, distance: localMin };
   }
 
-  clear() {
+  clear(): void {
     this.currRoute = [];
     this.bestRoute = [];
   }

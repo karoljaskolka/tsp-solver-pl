@@ -19,8 +19,8 @@ export class SelectComponent implements ControlValueAccessor {
 
   constructor(private cdRef: ChangeDetectorRef) { }
 
-  _onChange = (obj: any) => {}
-  _onTouch = () => {}
+  _onChange = (obj: any) => {};
+  _onTouch = () => {};
 
   writeValue(obj: any): void {
     if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === null) {
@@ -29,13 +29,13 @@ export class SelectComponent implements ControlValueAccessor {
 		}
   }
 
-  onChange(value) {
+  onChange(value): void {
     this.value = value;
     this._onChange(this.value);
     this.cdRef.markForCheck();
   }
 
-  onTouch() {
+  onTouch(): void {
     this._onTouch();
     this.cdRef.markForCheck();
   }

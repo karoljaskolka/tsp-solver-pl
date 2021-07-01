@@ -12,7 +12,7 @@ const COMPONENTS = [
   HeaderComponent,
   RouteComponent,
   SelectComponent,
-]
+];
 
 @NgModule({
   declarations: [COMPONENTS],
