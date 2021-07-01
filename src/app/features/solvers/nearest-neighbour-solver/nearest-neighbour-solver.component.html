@@ -1,27 +1,26 @@
 <section class="pg-4">
     <div class="mb-5">
-        <tsp-map [bestRoute]="bestRoute" [currRoute]="currRoute"></tsp-map>
+        <tsp-map [currRoute]="currRoute">
+            <div class="has-text-small has-text-gray">
+                <p class="has-text-gray">* Choice of next city is slowed down by 250ms</p>
+            </div>
+        </tsp-map>
     </div>
     <div>
-        <div class="is-flex is-space-between summary pg-3 has-align-items-center">
-            <div class="mr-4">
-                <label class="has-text-medium mr-2">Start city :</label>
-                <select [formControl]="startCity" class="pv-2 ph-3 has-text-medium has-radius has-bg-complementary mr-4">
-                    <option [disabled]="isRunning" *ngFor="let city of cities; let i = index" [value]="i">{{ city.name }}</option>
-                </select>
-                <label class="has-text-medium mr-4">Delay: </label>
-                <input [disabled]="isRunning" type="range" min="100" max="1000" step="100" list="tickmarks" [(ngModel)]="delayTime">
-            </div>
+        <div class="is-flex is-space-between summary pg-3 has-align-items-center has-border-bottom">
+            <tsp-select [formControl]="startCity" label="Start :">
+                <option [disabled]="isRunning" *ngFor="let city of cities; let i = index" [value]="i">{{ city.name }}</option>
+            </tsp-select>
             <div>
                 <button 
-                    class="pv-2 ph-3 has-radius has-bg-yellow has-text-primary has-text-medium mr-4" 
+                    class="pv-2 ph-3 has-radius has-bg-yellow has-text-medium has-text-primary mr-3" 
                     [disabled]="isRunning" 
                     (click)="solve()"
                 >
                     Solve
                 </button>
                 <button 
-                    class="pv-2 ph-3 has-radius has-bg-red has-text-primary has-text-medium" 
+                    class="pv-2 ph-3 has-radius has-bg-red has-text-medium has-text-primary" 
                     [disabled]="isRunning" 
                     (click)="clear()"
                 >

@@ -1,5 +1,5 @@
 <section class="mt-3">
-    <div class="is-flex border-container ph-3 pv-3 mb-2">
+    <div class="is-flex has-border-bottom pg-3 mb-2">
         <span class="is-flex-2">From</span>
         <span class="is-flex-2">To</span>
         <span class="is-flex-1 has-text-right">Distance</span>
@@ -15,7 +15,7 @@
             <span class="is-flex-2">{{ cities[currRoute[0]].name }}</span>
             <span class="is-flex-1 has-text-right">{{ calcDistance(cities[currRoute[i]], cities[currRoute[0]]) }} km</span>
         </div>
-        <div class="is-flex border-container ph-3 pv-2 mb-1  has-text-medium" *ngIf="last && currRoute.length === cities.length">
+        <div class="is-flex has-border-bottom ph-3 pv-2 mb-1 has-text-medium" *ngIf="last && currRoute.length === cities.length">
             <span class="is-flex-2"></span>
             <span class="is-flex-2"></span>
             <span class="is-flex-1 has-text-right">{{ getRouteDistance() }} km</span>

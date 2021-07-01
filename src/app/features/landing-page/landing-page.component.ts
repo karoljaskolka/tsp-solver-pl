@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { getRandomRoute } from 'src/app/utils/route';
 
 @Component({
   selector: 'tsp-landing-page',
@@ -10,6 +11,6 @@ export class LandingPageComponent implements OnInit {
   route: Array<number> = [];
 
   ngOnInit(): void {
-    this.route = Array.from(Array(18).keys());
+    this.route = getRandomRoute(18);
   }
 }

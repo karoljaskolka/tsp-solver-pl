@@ -15,3 +15,15 @@ export function calcDistance(from: CityDto, to: CityDto): number {
     const distance = R * c; 
     return Number(distance.toFixed(0));
 }
+
+export function getRouteDistance(route: Array<number>, cities: Array<CityDto>) {
+    let distance = 0;
+    route.forEach((city, i) => {
+      if (i !== route.length - 1) {
+        distance += calcDistance(cities[route[i]], cities[route[i + 1]])
+      } else {
+        distance += calcDistance(cities[route[route.length - 1]], cities[route[0]])
+      }
+    })
+    return distance;
+}

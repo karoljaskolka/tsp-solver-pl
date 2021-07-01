@@ -1,0 +1,20 @@
+@import '../../../../styles'
+
+section
+    display: grid
+    grid-template-columns: 1fr
+    +desktop
+        grid-template-columns: repeat(2, 1fr)
+
+.options
+    display: flex
+    flex-direction: column
+    tsp-select, button
+        margin: 0 0 1rem 0
+    +fullhd
+        flex-direction: row  
+        align-items: center  
+        tsp-select
+            margin-bottom: 0rem
+        button
+            margin: 0 0 0 1rem

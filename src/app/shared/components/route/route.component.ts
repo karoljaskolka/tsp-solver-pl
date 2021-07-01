@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { CityDto } from 'src/app/core/dto/city';
 import { CitiesService } from 'src/app/core/services/cities.service';
-import { calcDistance } from 'src/app/utils/distance';
+import { calcDistance, getRouteDistance } from 'src/app/utils/distance';
 
 @Component({
   selector: 'tsp-route',
@@ -28,15 +28,7 @@ export class RouteComponent implements OnInit {
   }
 
   getRouteDistance() {
-    let distance = 0;
-    this.currRoute.forEach((city, i) => {
-      if (i !== this.currRoute.length - 1) {
-        distance += this.calcDistance(this.cities[this.currRoute[i]], this.cities[this.currRoute[i + 1]])
-      } else {
-        distance += this.calcDistance(this.cities[this.currRoute[this.currRoute.length - 1]], this.cities[this.currRoute[0]])
-      }
-    })
-    return distance;
+    return getRouteDistance(this.currRoute, this.cities);
   }
 
 }

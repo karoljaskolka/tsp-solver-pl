@@ -11,16 +11,13 @@ import { calcDistance } from 'src/app/utils/distance';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NearestNeighbourSolverComponent implements OnInit {
-  bestRoute: Array<number> = [];
   currRoute: Array<number> = [];
-  
+
   cities: CityDto[];
+  delayTime: number = 250;
+  isRunning: boolean = false;
 
   startCity: FormControl = new FormControl(0);
-
-  delayTime: number = 300;
-
-  isRunning: boolean = false;
 
   constructor(private citiesService: CitiesService, private cdRef: ChangeDetectorRef) { }
 

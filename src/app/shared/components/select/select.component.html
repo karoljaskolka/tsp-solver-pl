@@ -1,0 +1,9 @@
+<label class="mr-3">{{ label }}</label>
+<select
+    class="pg-2 mr-3 has-text-medium has-radius"
+    [value]="value"
+    (change)="onChange($event.target.value)"
+    (focus)="onTouch()"
+>
+    <ng-content></ng-content>
+</select>
