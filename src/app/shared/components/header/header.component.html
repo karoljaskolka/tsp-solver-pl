@@ -2,8 +2,18 @@
     <div>
         <a routerLink="">TSP</a>
     </div>
-    <nav>
-        <a routerLink="solvers">Solver</a>
-        <!-- <a class="ml-4">Algorithms</a> -->
+    <nav class="is-flex">
+        <a routerLink="solvers/nearest-neighbour" routerLinkActive="has-text-yellow" class="mr-3">
+            <span class="is-mobile">NN</span>
+            <span class="is-not-mobile">Nearest Neighbour</span>
+        </a>
+        <a routerLink="solvers/local-search" routerLinkActive="has-text-yellow" class="mr-3">
+            <span class="is-mobile">LS</span>
+            <span class="is-not-mobile">Local Search</span>
+        </a>
+        <!-- <a routerLink="solvers/genetic-algorithm" routerLinkActive="has-text-yellow">
+            <span class="is-mobile">GA</span>
+            <span class="is-not-mobile">Genetic Algorithm</span>
+        </a> -->
     </nav>
 </header>

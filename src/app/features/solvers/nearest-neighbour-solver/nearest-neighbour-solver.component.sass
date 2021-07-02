@@ -5,3 +5,19 @@ section
     grid-template-columns: 1fr
     +desktop
         grid-template-columns: repeat(2, 1fr)
+
+.options
+    display: flex
+    flex-direction: column
+    tsp-select
+        margin: 0 0 1rem 0
+    ::ng-deep label
+        width: 50px
+        display: inline-block
+    ::ng-deep select
+        width: 125px
+    +fullhd
+        flex-direction: row  
+        align-items: center  
+        tsp-select
+            margin-bottom: 0rem

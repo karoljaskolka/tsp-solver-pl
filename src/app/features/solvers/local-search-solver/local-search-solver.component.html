@@ -1,37 +1,20 @@
 <section class="pg-4">
-    <div class="mb-5">
+    <div class="mb-4">
         <tsp-map [bestRoute]="bestRoute" [currRoute]="currRoute">
-            <div class="has-text-small has-text-gray">
-                <p class="has-text-gray">* The starting route is randomly generated</p>
-            </div>
+            <p class="has-text-small has-text-gray">* The starting route is randomly generated</p>
         </tsp-map>
     </div>
     <div>
-        <div class="is-flex is-space-between summary pg-3 has-align-items-center has-border-bottom">
+        <div class="is-flex is-space-between ph-3 pv-2 has-align-items-center has-border-bottom">
             <form [formGroup]="form" class="options">
-                <tsp-select formControlName="operation" label="Start :">
+                <tsp-select formControlName="operation" label="Operation :">
                     <option [disabled]="isRunning" *ngFor="let operation of operationsList" [value]="operation">{{ operation }}</option>
                 </tsp-select>
-                <tsp-select formControlName="iterations" label="Max iterations :">
+                <tsp-select formControlName="iterations" label="Iterations :">
                     <option [disabled]="isRunning" *ngFor="let iteration of iterationsList" [value]="iteration">{{ iteration }}</option>
                 </tsp-select>
             </form>
-            <div class="options">
-                <button 
-                    class="pv-2 ph-3 has-radius has-bg-yellow has-text-primary has-text-medium" 
-                    [disabled]="isRunning" 
-                    (click)="solve()"
-                >
-                    Solve
-                </button>
-                <button 
-                    class="pv-2 ph-3 has-radius has-bg-red has-text-primary has-text-medium" 
-                    [disabled]="isRunning" 
-                    (click)="clear()"
-                >
-                    Clear
-                </button>
-            </div>
+            <tsp-action-buttons (solve)="solve()" (clear)="clear()" [disabled]="isRunning"></tsp-action-buttons>
         </div>
         <div>
             <tsp-route [currRoute]="bestRoute"></tsp-route>

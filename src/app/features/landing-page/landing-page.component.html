@@ -1,5 +1,5 @@
 <section class="is-grid-12">
-    <div class="description-container pv-4 ph-4">
+    <div class="description-container pg-4">
         <p class="pb-5 has-text-large">
             Travelling salesman problem
         </p>
@@ -9,10 +9,10 @@
         <p class="has-text-medium has-text-justified pb-4">
             There are many algorithms and heuristics used to approximate the solution. Therefore I will present three chosen by myself methods - <a routerLink="solvers/nearest-neighbour">Nearest Neighbour</a>, <a routerLink="solvers/local-search">Local Search</a> and Genetic Algorithm.
         </p>
-        <p class="has-text-medium has-text-justified pb-4">
+        <p class="has-text-medium has-text-justified">
             I have decided to prepare and use the dataset of the Polish voivodeships' capital cities (18) like eg. Warsaw (Masovian), Kraków (Lesser Poland), Poznań (Greater Poland) or Wrocław (Lower Silesian). The number of cities is small, because that will allow easier visualization of the program computing.
     </div>
-    <div class="map-container">
+    <div class="map-container pg-4">
         <tsp-map [currRoute]="route"></tsp-map>
     </div>
 </section>

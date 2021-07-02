@@ -1,0 +1,16 @@
+<div class="action-buttons">
+    <button 
+        class="pv-2 ph-3 has-radius has-bg-yellow has-text-medium has-text-primary mr-3" 
+        [disabled]="disabled" 
+        (click)="onSolve()"
+    >
+        Solve
+    </button>
+    <button 
+        class="pv-2 ph-3 has-radius has-bg-red has-text-medium has-text-primary" 
+        [disabled]="disabled" 
+        (click)="onClear()"
+    >
+        Clear
+    </button>
+</div>

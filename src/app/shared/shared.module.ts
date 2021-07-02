@@ -6,12 +6,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { MapComponent } from './components/map/map.component';
 import { RouteComponent } from './components/route/route.component';
 import { SelectComponent } from './components/select/select.component';
+import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
 
 const COMPONENTS = [
   MapComponent,
   HeaderComponent,
   RouteComponent,
   SelectComponent,
+  ActionButtonsComponent,
 ];
 
 @NgModule({

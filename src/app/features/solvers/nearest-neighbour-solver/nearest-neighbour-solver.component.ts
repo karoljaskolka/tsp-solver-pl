@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CityDto } from 'src/app/core/dto/city';
 import { CitiesService } from 'src/app/core/services/cities.service';
 import { calcDistance } from 'src/app/utils/distance';
@@ -14,12 +14,26 @@ export class NearestNeighbourSolverComponent implements OnInit {
   currRoute: Array<number> = [];
 
   cities: CityDto[];
-  delayTime: number = 250;
   isRunning: boolean = false;
 
-  startCity: FormControl = new FormControl(0);
+  form: FormGroup = new FormGroup({
+    startCity: new FormControl(0),
+    delayTime: new FormControl(250),
+  });
 
   constructor(private citiesService: CitiesService, private cdRef: ChangeDetectorRef) { }
+
+  get startCity() {
+    return this.form.value.startCity;
+  }
+
+  get delayTime() {
+    return this.form.value.delayTime;
+  }
+
+  get delayTimeList() {
+    return [100, 250, 500, 750, 1000];
+  }
 
   ngOnInit(): void {
     this.citiesService.getCities().subscribe(cities => {
@@ -34,9 +48,9 @@ export class NearestNeighbourSolverComponent implements OnInit {
 
   async solve(): Promise<void> {
     this.isRunning = true;
-    let leftCities = Array.from(Array(18).keys()).filter(index => index != this.startCity.value);
+    let leftCities = Array.from(Array(18).keys()).filter(index => index != this.startCity);
     this.currRoute = [];
-    this.currRoute.push(this.startCity.value);
+    this.currRoute.push(this.startCity);
     while (leftCities.length) {
       await this.delay();
       const nearestNeighbourIndex = this.getNearestNeighbour(this.currRoute[this.currRoute.length - 1], leftCities);

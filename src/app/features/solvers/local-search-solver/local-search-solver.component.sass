@@ -9,12 +9,15 @@ section
 .options
     display: flex
     flex-direction: column
-    tsp-select, button
+    tsp-select
         margin: 0 0 1rem 0
+    ::ng-deep label
+        width: 80px
+        display: inline-block
+    ::ng-deep select
+        width: 75px
     +fullhd
         flex-direction: row  
         align-items: center  
         tsp-select
             margin-bottom: 0rem
-        button
-            margin: 0 0 0 1rem

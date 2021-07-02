@@ -2,7 +2,7 @@
     { "name": "Białystok", "long": 23.16, "lat": 53.13 },
     { "name": "Bydgoszcz", "long": 18.00, "lat": 53.11 },
     { "name": "Gdańsk", "long": 18.63, "lat": 54.36 },
-    { "name": "Gorzów Wielkopolski", "long": 15.25, "lat": 52.73 },
+    { "name": "Gorzów Wlkp.", "long": 15.25, "lat": 52.73 },
     { "name": "Katowice", "long": 19.00, "lat": 50.25 },
     { "name": "Kielce", "long": 20.61, "lat": 50.88 },
     { "name": "Kraków", "long": 19.95, "lat": 50.05 },
