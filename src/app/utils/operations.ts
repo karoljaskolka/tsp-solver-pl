@@ -8,7 +8,11 @@ export function swap(array: Array<number>, i, j): Array<number> {
 export function insert(array: Array<number>, i, j): Array<number> {
     const temp = array[i];
     array = array.filter(e => e !== temp);
-    array.splice(j, 0, temp);
+    if (i < j) {
+        array.splice(j - 1, 0, temp);
+    } else {
+        array.splice(j, 0, temp);
+    }
     return array;
 }
 

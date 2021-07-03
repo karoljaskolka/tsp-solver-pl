@@ -1,0 +1,42 @@
+<section class="pg-4">
+    <div class="mb-4">
+        <div *ngIf="generationNumber" class="has-text-centered has-text-big">
+            Generation : {{ generationNumber }}
+        </div>
+        <tsp-map [bestRoute]="bestRoute">
+            <p class="has-text-small has-text-gray">* Every generation is slowed down by {{ delayTime }}ms</p>
+        </tsp-map>
+    </div>
+    <div>
+        <div class="is-flex is-space-between ph-3 pv-2 has-align-items-center has-border-bottom">
+            <form [formGroup]="form">
+                <div class="options">
+                    <tsp-select formControlName="populationSize" label="Population :">
+                        <option [disabled]="isRunning" *ngFor="let population of populationList" [value]="population">{{ population }}</option>
+                    </tsp-select>
+                    <tsp-select formControlName="generations" label="Generations :">
+                        <option [disabled]="isRunning" *ngFor="let generation of generationsList" [value]="generation">{{ generation }}</option>
+                    </tsp-select>
+                    <tsp-select formControlName="selection" label="Selection :">
+                        <option [disabled]="isRunning" *ngFor="let selection of selectionList" [value]="selection">{{ selection }}</option>
+                    </tsp-select>
+                </div>
+                <div class="options">
+                    <tsp-select formControlName="crossover" label="Crossover :">
+                        <option [disabled]="isRunning" *ngFor="let crossover of crossoverList" [value]="crossover">{{ crossover }}</option>
+                    </tsp-select>
+                    <tsp-select formControlName="mutation" label="Mutation :">
+                        <option [disabled]="isRunning" *ngFor="let mutation of mutationList" [value]="mutation">{{ mutation }}</option>
+                    </tsp-select>
+                    <tsp-select formControlName="mutationRate" label="Mutation(%) :">
+                        <option [disabled]="isRunning" *ngFor="let mutationRate of mutationRateList" [value]="mutationRate">{{ mutationRate }}%</option>
+                    </tsp-select>
+                </div>
+            </form>
+            <tsp-action-buttons (solve)="solve()" (clear)="clear()" [disabled]="isRunning"></tsp-action-buttons>
+        </div>
+        <div>
+            <tsp-route [currRoute]="bestRoute"></tsp-route>
+        </div>
+    </div>
+</section>

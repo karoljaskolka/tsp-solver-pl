@@ -6,11 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NearestNeighbourSolverComponent } from './nearest-neighbour-solver/nearest-neighbour-solver.component';
 import { LocalSearchSolverComponent } from './local-search-solver/local-search-solver.component';
+import { GeneticAlgorithmSolverComponent } from './genetic-algorithm-solver/genetic-algorithm-solver.component';
 
 @NgModule({
   declarations: [
     NearestNeighbourSolverComponent,
-    LocalSearchSolverComponent
+    LocalSearchSolverComponent,
+    GeneticAlgorithmSolverComponent,
   ],
   imports: [
     CommonModule,

@@ -21,7 +21,7 @@ export class LocalSearchSolverComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     operation: new FormControl('swap'),
-    iterations: new FormControl(15)
+    iterations: new FormControl(20)
   });
 
   get operation() {
@@ -76,9 +76,17 @@ export class LocalSearchSolverComponent implements OnInit {
     for (let i = 0; i < this.cities.length; i++) {
       for (let j = 0; j < this.cities.length; j++) {
         if (i !== j) {
-          if (this.operation === 'swap') { this.currRoute = swap([...route], i, j); }
-          if (this.operation === 'insert') { this.currRoute = insert([...route], i, j); }
-          if (this.operation === 'invert') { this.currRoute = invert([...route], i, j); }
+          switch (this.operation) {
+            case 'swap':
+              this.currRoute = swap([...route], i, j);
+              break;
+            case 'insert':
+              this.currRoute = insert([...route], i, j);
+              break;
+            case 'invert':
+              this.currRoute = invert([...route], i, j);
+              break;
+          }
           await this.delay(1);
           this.cdRef.markForCheck();
           const localDistance = getRouteDistance(this.currRoute, this.cities);
