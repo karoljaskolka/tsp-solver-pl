@@ -1,27 +1,57 @@
-# Tsp
+# TSP Solver (Visualization)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.13.
+I've made this travelling salesman problem solver visualization inspired by [university project](https://github.com/KarolJaskolka/TravellingSalesmanProblem) I did in past (2019/20).
 
-## Development server
+<p align="center">
+  <img width="350" height="350" src="readme_files/solution.PNG">
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Methods
 
-## Code scaffolding
+### Nearest Neighbour
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Parameters: 
 
-## Build
+- Start city
+### Local Search
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Parameters: 
 
-## Running unit tests
+- Operation: Swap, Insert, Invert
+- Iterations: 5-25
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Genetic Algorithm
 
-## Running end-to-end tests
+Parameters: 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- Population size: 10-100
+- Generations: 10-100
+- Selection: Rank
+- Crossover: OX
+- Mutation: Swap, Insert, Invert
+- Mutation rate: 1-10 %
 
-## Further help
+## Dataset
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+| City  | Longitude | Latitude |
+| ------------ | ----- | ----- |
+| Białystok    | 23.16 | 53.13 |
+| Bydgoszcz    | 18.00 | 53.11 |
+| Gdańsk       | 18.63 | 54.36 |
+| Gorzów Wlkp. | 15.25 | 52.73 |
+| Katowice     | 19.00 | 50.25 |
+| Kielce       | 20.61 | 50.88 |
+| Kraków       | 19.95 | 50.05 |
+| Lublin       | 22.56 | 51.23 |
+| Łódź         | 19.46 | 51.78 |
+| Olsztyn      | 20.50 | 53.78 |
+| Opole        | 17.93 | 50.66 |
+| Poznań       | 16.91 | 52.41 |
+| Rzeszów      | 22.01 | 50.05 |
+| Szczecin     | 14.56 | 53.43 |
+| Toruń        | 18.61 | 53.03 |
+| Warszawa     | 21.03 | 52.20 |
+| Wrocław      | 17.03 | 51.11 |
+| Zielona Góra | 15.50 | 51.93 |

@@ -9,8 +9,12 @@
         <p class="has-text-medium has-text-justified pb-4">
             There are many algorithms and heuristics used to approximate the solution. Therefore I will present three chosen by myself methods - <a routerLink="solvers/nearest-neighbour">Nearest Neighbour</a>, <a routerLink="solvers/local-search">Local Search</a> and <a routerLink="solvers/genetic-algorithm">Genetic Algorithm</a>.
         </p>
-        <p class="has-text-medium has-text-justified">
+        <p class="has-text-medium has-text-justified pb-4">
             I have decided to prepare and use the dataset of the Polish voivodeships' capital cities (18) like eg. Warsaw (Masovian), Kraków (Lesser Poland), Poznań (Greater Poland) or Wrocław (Lower Silesian). The number of cities is small, because that will allow easier visualization of the program computing.
+        </p>
+        <p class="has-text-justified">
+            Source code of the project can be found on my <a href="https://github.com/KarolJaskolka/tsp-solver-pl" target="_blank">GitHub repository</a>. 
+        </p>
     </div>
     <div class="map-container pg-4">
         <tsp-map [bestRoute]="route"></tsp-map>
