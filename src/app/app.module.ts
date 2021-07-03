@@ -7,6 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { FeaturesModule } from './features/features.module';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { CitiesEffects } from './core/store/cities.effects';
+import { citiesReducer } from './core/store/cities.reducers';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +21,9 @@ import { FeaturesModule } from './features/features.module';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    FeaturesModule
+    FeaturesModule,
+    StoreModule.forRoot({ cities: citiesReducer }),
+		EffectsModule.forRoot([CitiesEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

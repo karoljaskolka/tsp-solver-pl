@@ -1,10 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CityDto } from 'src/app/core/dto/city';
-import { CitiesService } from 'src/app/core/services/cities.service';
 import { getRouteDistance } from 'src/app/utils/distance';
 import { insert, invert, swap } from 'src/app/utils/operations';
 import { getRandomRoute } from 'src/app/utils/route';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { selectCities } from 'src/app/core/store/cities.selectors';
+import { AppState } from 'src/app/core/store/state';
 
 @Component({
   selector: 'tsp-local-search-solver',
@@ -12,11 +15,12 @@ import { getRandomRoute } from 'src/app/utils/route';
   styleUrls: ['./local-search-solver.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LocalSearchSolverComponent implements OnInit {
+export class LocalSearchSolverComponent implements OnInit, OnDestroy {
   bestRoute: Array<number> = [];
   currRoute: Array<number> = [];
 
   cities: CityDto[];
+  citiesSub$: Subscription;
   isRunning: boolean = false;
 
   form: FormGroup = new FormGroup({
@@ -40,13 +44,17 @@ export class LocalSearchSolverComponent implements OnInit {
     return [5, 10, 15, 20, 25];
   }
 
-  constructor(private citiesService: CitiesService, private cdRef: ChangeDetectorRef) { }
+  constructor(private cdRef: ChangeDetectorRef, private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.citiesService.getCities().subscribe(cities => {
+    this.citiesSub$ = this.store.select(selectCities).subscribe(cities => {
       this.cities = cities;
       this.cdRef.markForCheck();
     });
+  }
+
+  ngOnDestroy() {
+    this.citiesSub$.unsubscribe();
   }
 
   async solve(): Promise<void>{

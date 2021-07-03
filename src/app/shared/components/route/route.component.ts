@@ -1,7 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CityDto } from 'src/app/core/dto/city';
-import { CitiesService } from 'src/app/core/services/cities.service';
 import { calcDistance, getRouteDistance } from 'src/app/utils/distance';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { selectCities } from 'src/app/core/store/cities.selectors';
+import { AppState } from 'src/app/core/store/state';
 
 @Component({
   selector: 'tsp-route',
@@ -9,18 +12,23 @@ import { calcDistance, getRouteDistance } from 'src/app/utils/distance';
   styleUrls: ['./route.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RouteComponent implements OnInit {
+export class RouteComponent implements OnInit, OnDestroy {
   @Input() currRoute: Array<number> = [];
 
   cities: Array<CityDto> = [];
+  citiesSub$: Subscription;
 
-  constructor(private citiesService: CitiesService, private cdRef: ChangeDetectorRef) { }
+  constructor(private cdRef: ChangeDetectorRef, private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.citiesService.getCities().subscribe(cities => {
+    this.citiesSub$ = this.store.select(selectCities).subscribe(cities => {
       this.cities = cities;
       this.cdRef.markForCheck();
     });
+  }
+
+  ngOnDestroy() {
+    this.citiesSub$.unsubscribe();
   }
 
   calcDistance(from: CityDto, to: CityDto): number {

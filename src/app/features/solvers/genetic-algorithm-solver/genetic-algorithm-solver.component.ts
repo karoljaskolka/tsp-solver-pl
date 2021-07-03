@@ -1,12 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CityDto } from 'src/app/core/dto/city';
-import { CitiesService } from 'src/app/core/services/cities.service';
 import { removeDuplicates } from 'src/app/utils/array';
 import { orderedCrossover } from 'src/app/utils/crossovers';
 import { getRouteDistance } from 'src/app/utils/distance';
 import { swap } from 'src/app/utils/operations';
 import { getRandomRoute } from 'src/app/utils/route';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { selectCities } from 'src/app/core/store/cities.selectors';
+import { AppState } from 'src/app/core/store/state';
 
 @Component({
   selector: 'tsp-genetic-algorithm-solver',
@@ -14,12 +17,13 @@ import { getRandomRoute } from 'src/app/utils/route';
   styleUrls: ['./genetic-algorithm-solver.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GeneticAlgorithmSolverComponent implements OnInit {
+export class GeneticAlgorithmSolverComponent implements OnInit, OnDestroy {
   bestRoute: Array<number> = [];
   bestScore: number;
   generationNumber: number;
 
   cities: CityDto[];
+  citiesSub$: Subscription;
   isRunning: boolean = false;
   delayTime: number = 250;
 
@@ -31,8 +35,6 @@ export class GeneticAlgorithmSolverComponent implements OnInit {
     mutation: new FormControl('swap'),
     mutationRate: new FormControl(5),
   });
-
-  constructor(private citiesService: CitiesService, private cdRef: ChangeDetectorRef) { }
 
   get populationList(): Array<number> {
     return [10, 25, 50, 75, 100];
@@ -82,11 +84,17 @@ export class GeneticAlgorithmSolverComponent implements OnInit {
     return this.form.value.crossover;
   }
 
+  constructor(private cdRef: ChangeDetectorRef, private store: Store<AppState>) { }
+
   ngOnInit(): void {
-    this.citiesService.getCities().subscribe(cities => {
+    this.citiesSub$ = this.store.select(selectCities).subscribe(cities => {
       this.cities = cities;
       this.cdRef.markForCheck();
     });
+  }
+
+  ngOnDestroy() {
+    this.citiesSub$.unsubscribe();
   }
 
   async solve(): Promise<void> {

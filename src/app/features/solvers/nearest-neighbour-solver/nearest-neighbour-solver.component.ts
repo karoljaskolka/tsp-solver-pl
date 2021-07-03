@@ -1,8 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CityDto } from 'src/app/core/dto/city';
-import { CitiesService } from 'src/app/core/services/cities.service';
 import { calcDistance } from 'src/app/utils/distance';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { selectCities } from 'src/app/core/store/cities.selectors';
+import { AppState } from 'src/app/core/store/state';
 
 @Component({
   selector: 'tsp-nearest-neighbour-solver',
@@ -10,18 +13,17 @@ import { calcDistance } from 'src/app/utils/distance';
   styleUrls: ['./nearest-neighbour-solver.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NearestNeighbourSolverComponent implements OnInit {
+export class NearestNeighbourSolverComponent implements OnInit, OnDestroy {
   currRoute: Array<number> = [];
 
   cities: CityDto[];
+  citiesSub$: Subscription;
   isRunning: boolean = false;
 
   form: FormGroup = new FormGroup({
     startCity: new FormControl(0),
     delayTime: new FormControl(250),
   });
-
-  constructor(private citiesService: CitiesService, private cdRef: ChangeDetectorRef) { }
 
   get startCity() {
     return this.form.value.startCity;
@@ -35,11 +37,17 @@ export class NearestNeighbourSolverComponent implements OnInit {
     return [100, 250, 500, 750, 1000];
   }
 
+  constructor(private cdRef: ChangeDetectorRef, private store: Store<AppState>) { }
+
   ngOnInit(): void {
-    this.citiesService.getCities().subscribe(cities => {
+    this.citiesSub$ = this.store.select(selectCities).subscribe(cities => {
       this.cities = cities;
       this.cdRef.markForCheck();
     });
+  }
+
+  ngOnDestroy() {
+    this.citiesSub$.unsubscribe();
   }
 
   calcDistance(from: CityDto, to: CityDto): number {

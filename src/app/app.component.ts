@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { loadCities } from './core/store/cities.actions';
+import { AppState } from './core/store/state';
 
 @Component({
   selector: 'tsp-root',
@@ -6,6 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./app.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+	constructor(private store: Store<AppState>) {}
 
+	ngOnInit() {
+		this.store.dispatch(loadCities());
+	}
 }
