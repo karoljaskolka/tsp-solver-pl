@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CityDto } from 'src/app/core/dto/city';
 import { calcDistance } from 'src/app/utils/distance';
 import { Store } from '@ngrx/store';
@@ -20,9 +20,9 @@ export class NearestNeighbourSolverComponent implements OnInit, OnDestroy {
   citiesSub$: Subscription;
   isRunning: boolean = false;
 
-  form: FormGroup = new FormGroup({
-    startCity: new FormControl(0),
-    delayTime: new FormControl(250),
+  form: UntypedFormGroup = new UntypedFormGroup({
+    startCity: new UntypedFormControl(0),
+    delayTime: new UntypedFormControl(250),
   });
 
   get startCity() {

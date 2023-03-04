@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CityDto } from 'src/app/core/dto/city';
 import { getRouteDistance } from 'src/app/utils/distance';
 import { insert, invert, swap } from 'src/app/utils/operations';
@@ -23,9 +23,9 @@ export class LocalSearchSolverComponent implements OnInit, OnDestroy {
   citiesSub$: Subscription;
   isRunning: boolean = false;
 
-  form: FormGroup = new FormGroup({
-    operation: new FormControl('swap'),
-    iterations: new FormControl(20)
+  form: UntypedFormGroup = new UntypedFormGroup({
+    operation: new UntypedFormControl('swap'),
+    iterations: new UntypedFormControl(20)
   });
 
   get operation() {

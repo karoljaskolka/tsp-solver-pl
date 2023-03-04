@@ -3,7 +3,7 @@
 I've made this travelling salesman problem solver visualization inspired by [university project](https://github.com/KarolJaskolka/TravellingSalesmanProblem) I did in past (2019/20).
 
 <p align="center">
-  <img width="350" height="350" src="readme_files/solution.PNG">
+  <img width="350" height="350" src="docs/solution.PNG">
 </p>
 
 ## Methods

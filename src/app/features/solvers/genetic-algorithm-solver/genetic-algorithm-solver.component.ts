@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CityDto } from 'src/app/core/dto/city';
 import { removeDuplicates } from 'src/app/utils/array';
 import { orderedCrossover } from 'src/app/utils/crossovers';
@@ -27,13 +27,13 @@ export class GeneticAlgorithmSolverComponent implements OnInit, OnDestroy {
   isRunning: boolean = false;
   delayTime: number = 250;
 
-  form: FormGroup = new FormGroup({
-    populationSize: new FormControl(75),
-    generations: new FormControl(50),
-    selection: new FormControl('rank'),
-    crossover: new FormControl('OX'),
-    mutation: new FormControl('swap'),
-    mutationRate: new FormControl(5),
+  form: UntypedFormGroup = new UntypedFormGroup({
+    populationSize: new UntypedFormControl(75),
+    generations: new UntypedFormControl(50),
+    selection: new UntypedFormControl('rank'),
+    crossover: new UntypedFormControl('OX'),
+    mutation: new UntypedFormControl('swap'),
+    mutationRate: new UntypedFormControl(5),
   });
 
   get populationList(): Array<number> {
